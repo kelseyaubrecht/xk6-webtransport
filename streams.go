@@ -27,7 +27,9 @@ func (c *Connection) CloseStreamById(id int64) {
 	if c.streams[id] != nil {
 		c.streams[id].Close()
 		delete(c.streams, id)
-		// set stream?
+		if c.activeStream != nil && int64(c.activeStream.StreamID()) == id {
+			c.activeStream = nil
+		}
 	}
 }
 
