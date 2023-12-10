@@ -5,12 +5,15 @@ export default function () {
   let data = [0, 1, 2, 3, 4];
 
   wt.connect(url);
-  wt.openStream();
 
+  let streamOneid = wt.openStream();
   wt.write(data);
 
-  const response = wt.readAll();
-  // handle response
+  let streamTwoid = wt.openStream();
+  wt.write(data);
+
+  wt.setActiveStream(streamOneid);
+  wt.write(data);
 
   wt.close();
 }

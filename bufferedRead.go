@@ -4,7 +4,7 @@ func (c *Connection) ReadStream(maxReadLength int) {
 	for {
 		rsp := make([]byte, maxReadLength)
 
-		n, err := c.Stream.Read(rsp)
+		n, err := c.activeStream.Read(rsp)
 		if err != nil {
 			break
 		}

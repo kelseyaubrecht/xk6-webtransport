@@ -3,7 +3,6 @@ package wt
 import (
 	"context"
 	"log"
-	"time"
 
 	"github.com/quic-go/webtransport-go"
 	"go.k6.io/k6/js/modules"
@@ -12,10 +11,10 @@ import (
 type Connection struct {
 	vu           modules.VU
 	Session      *webtransport.Session
-	Stream       webtransport.Stream
+	activeStream webtransport.Stream
 	metrics      WTMetrics
-	requestTimes []time.Time
 	readBuffer   [][]byte
+	streams      map[int64]webtransport.Stream
 }
 
 func (c *Connection) Connect(url string) {
@@ -27,16 +26,12 @@ func (c *Connection) Connect(url string) {
 	}
 	c.Session = sess
 
-	str, err := c.Session.OpenStream()
-	if err != nil {
-		log.Println("Stream error: " + err.Error())
-	}
-	c.Stream = str
+	c.streams = make(map[int64]webtransport.Stream)
 }
 
 func (c *Connection) Close() {
-	if c.Stream != nil {
-		c.Stream.Close()
+	if c.activeStream != nil {
+		c.CloseAllStreams()
 	}
 	c.Session.CloseWithError(0, "")
 }

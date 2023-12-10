@@ -9,8 +9,7 @@ import (
 )
 
 func (c *Connection) Write(p []byte) {
-	c.requestTimes = append(c.requestTimes, time.Now())
-	n, err := c.Stream.Write(p)
+	n, err := c.activeStream.Write(p)
 	defer c.logWriteMetrics(n)
 	if err != nil {
 		log.Println("Write error: " + err.Error())

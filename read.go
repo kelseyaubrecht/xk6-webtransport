@@ -10,7 +10,7 @@ import (
 )
 
 func (c *Connection) ReadAll() []byte {
-	rsp, err := io.ReadAll(c.Stream)
+	rsp, err := io.ReadAll(c.activeStream)
 	defer c.logReadMetrics(len(rsp))
 
 	if err != nil {
@@ -22,7 +22,7 @@ func (c *Connection) ReadAll() []byte {
 
 func (c *Connection) ReadFull(expectedReadLength int) []byte {
 	rsp := make([]byte, expectedReadLength)
-	n, err := io.ReadFull(c.Stream, rsp)
+	n, err := io.ReadFull(c.activeStream, rsp)
 	defer c.logReadMetrics(n)
 
 	if err != nil {
@@ -37,7 +37,7 @@ func (c *Connection) ReadFull(expectedReadLength int) []byte {
 
 func (c *Connection) ReadAtLeast(maxReadLength int, minReadLength int) []byte {
 	rsp := make([]byte, maxReadLength)
-	n, err := io.ReadAtLeast(c.Stream, rsp, minReadLength)
+	n, err := io.ReadAtLeast(c.activeStream, rsp, minReadLength)
 	defer c.logReadMetrics(n)
 
 	if err != nil {
