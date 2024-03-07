@@ -1,0 +1,34 @@
+name: Test xk6-webtransport
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    name: Lint and check build with xk6-webtransport
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.22
+
+      - name: Run prettier for linting scripts, configs and docs
+        uses: creyD/prettier_action@v4.3
+        with:
+          dry: True
+  
+      - name: Lint code issues
+        uses: golangci/golangci-lint-action@v4
+        with:
+          skip-pkg-cache: true
+          
+      - name: Build k6 with xk6-webtransport
+        run: |
+          go install go.k6.io/xk6/cmd/xk6@latest
+          xk6 build --with github.com/k6io/xk6-webtransport@latest
+          
