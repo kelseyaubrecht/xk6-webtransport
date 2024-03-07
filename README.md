@@ -1,3 +1,5 @@
+![ ](https://github.com/kelseyaubrecht/xk6-webtransport/actions/workflows/test.yaml/badge.svg)
+
 # xk6-webtransport
 
 [k6](https://github.com/grafana/k6) extension to k6 extension to use the WebTransport protocol. Currently only supports bidirectional streams.
