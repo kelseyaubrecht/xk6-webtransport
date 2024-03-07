@@ -30,5 +30,5 @@ jobs:
       - name: Build k6 with xk6-webtransport
         run: |
           go install go.k6.io/xk6/cmd/xk6@latest
-          xk6 build --with github.com/kelseyaubrecht/xk6-webtransport@main
+          xk6 build --with github.com/kelseyaubrecht/xk6-webtransport@latest
           
