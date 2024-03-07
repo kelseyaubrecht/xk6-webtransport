@@ -23,7 +23,7 @@ jobs:
           dry: True
   
       - name: Lint code issues
-        uses: golangci/golangci-lint-action@v4
+        uses: golangci/golangci-lint-action@v3.7.1
         with:
           skip-pkg-cache: true
           
