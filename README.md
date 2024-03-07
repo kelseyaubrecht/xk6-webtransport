@@ -32,7 +32,7 @@ go install go.k6.io/xk6/cmd/xk6@latest
 2. Build the binary:
 
 ```shell
-xk6 build --with github.com/kelseyau/xk6-webtransport@latest
+xk6 build --with github.com/kelseyaubrecht/xk6-webtransport@latest
 ```
 
 ## Supported features
