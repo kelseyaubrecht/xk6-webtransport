@@ -1,4 +1,4 @@
-module xk6-webtransport
+module github.com/kelseyaubrecht/xk6-webtransport
 
 go 1.19
 
