@@ -1,7 +1,12 @@
 # xk6-webtransport
 
-[k6](https://github.com/grafana/k6) extension to k6 extension to use the WebTransport protocol. Currently only supports bidirectional streams.
+[k6](https://github.com/grafana/k6) extension to k6 extension to use the WebTransport protocol.
 Implemented using the [xk6](https://github.com/grafana/xk6) system and [webtransport-go](https://github.com/quic-go/webtransport-go).
+
+Supports:
+
+- bidirectional streams
+- datagrams
 
 ## Work in progress
 
@@ -23,13 +28,13 @@ To build a `k6` binary with this extension, first ensure you have the prerequisi
 
 Then:
 
-1. Install `xk6`:
+- Install `xk6`:
 
 ```shell
 go install go.k6.io/xk6/cmd/xk6@latest
 ```
 
-2. Build the binary:
+- Build the binary:
 
 ```shell
 xk6 build --with github.com/kelseyau/xk6-webtransport@latest

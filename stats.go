@@ -8,13 +8,21 @@ import (
 )
 
 type WTMetrics struct {
-	WriteCount *metrics.Metric
-	WriteBytes *metrics.Metric
-	WriteSize  *metrics.Metric
+	StreamsWriteCount *metrics.Metric
+	StreamsWriteBytes *metrics.Metric
+	StreamsWriteSize  *metrics.Metric
 
-	ReadCount *metrics.Metric
-	ReadBytes *metrics.Metric
-	ReadSize  *metrics.Metric
+	StreamsReadCount *metrics.Metric
+	StreamsReadBytes *metrics.Metric
+	StreamsReadSize  *metrics.Metric
+
+	StreamsTotal *metrics.Metric
+
+	DatagramsSentCount *metrics.Metric
+	DatagramsSentBytes *metrics.Metric
+
+	DatagramsRecvCount *metrics.Metric
+	DatagramsRecvBytes *metrics.Metric
 }
 
 func registerMetrics(vu modules.VU) (WTMetrics, error) {
@@ -22,33 +30,58 @@ func registerMetrics(vu modules.VU) (WTMetrics, error) {
 	registry := vu.InitEnv().Registry
 	wtMetrics := WTMetrics{}
 
-	if wtMetrics.WriteCount, err = registry.NewMetric(
+	if wtMetrics.StreamsWriteCount, err = registry.NewMetric(
 		"webtransport_write_count", metrics.Counter); err != nil {
 		return wtMetrics, errors.Unwrap(err)
 	}
 
-	if wtMetrics.WriteBytes, err = registry.NewMetric(
+	if wtMetrics.StreamsWriteBytes, err = registry.NewMetric(
 		"webtransport_write_bytes", metrics.Counter, metrics.Data); err != nil {
 		return wtMetrics, errors.Unwrap(err)
 	}
 
-	if wtMetrics.WriteSize, err = registry.NewMetric(
+	if wtMetrics.StreamsWriteSize, err = registry.NewMetric(
 		"webtransport_write_size", metrics.Trend, metrics.Data); err != nil {
 		return wtMetrics, errors.Unwrap(err)
 	}
 
-	if wtMetrics.ReadCount, err = registry.NewMetric(
+	if wtMetrics.StreamsReadCount, err = registry.NewMetric(
 		"webtransport_read_count", metrics.Counter); err != nil {
 		return wtMetrics, errors.Unwrap(err)
 	}
 
-	if wtMetrics.ReadBytes, err = registry.NewMetric(
+	if wtMetrics.StreamsReadBytes, err = registry.NewMetric(
 		"webtransport_read_bytes", metrics.Counter, metrics.Data); err != nil {
 		return wtMetrics, errors.Unwrap(err)
 	}
 
-	if wtMetrics.ReadSize, err = registry.NewMetric(
+	if wtMetrics.StreamsReadSize, err = registry.NewMetric(
 		"webtransport_read_size", metrics.Trend, metrics.Data); err != nil {
+		return wtMetrics, errors.Unwrap(err)
+	}
+
+	if wtMetrics.StreamsTotal, err = registry.NewMetric(
+		"webtransport_streams_total", metrics.Counter); err != nil {
+		return wtMetrics, errors.Unwrap(err)
+	}
+
+	if wtMetrics.DatagramsSentCount, err = registry.NewMetric(
+		"webtransport_datagrams_sent_count", metrics.Counter); err != nil {
+		return wtMetrics, errors.Unwrap(err)
+	}
+
+	if wtMetrics.DatagramsSentBytes, err = registry.NewMetric(
+		"webtransport_datagrams_sent_bytes", metrics.Counter, metrics.Data); err != nil {
+		return wtMetrics, errors.Unwrap(err)
+	}
+
+	if wtMetrics.DatagramsRecvCount, err = registry.NewMetric(
+		"webtransport_datagrams_received_count", metrics.Counter); err != nil {
+		return wtMetrics, errors.Unwrap(err)
+	}
+
+	if wtMetrics.DatagramsRecvBytes, err = registry.NewMetric(
+		"webtransport_datagrams_received_bytes", metrics.Counter, metrics.Data); err != nil {
 		return wtMetrics, errors.Unwrap(err)
 	}
 
