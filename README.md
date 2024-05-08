@@ -1,6 +1,6 @@
-![ ](https://github.com/kelseyaubrecht/xk6-webtransport/actions/workflows/test.yaml/badge.svg)
-
 # xk6-webtransport
+
+![ ](https://github.com/kelseyaubrecht/xk6-webtransport/actions/workflows/test.yaml/badge.svg)
 
 [k6](https://github.com/grafana/k6) extension to k6 extension to use the WebTransport protocol.
 Implemented using the [xk6](https://github.com/grafana/xk6) system and [webtransport-go](https://github.com/quic-go/webtransport-go).
@@ -52,7 +52,7 @@ xk6 build --with github.com/kelseyaubrecht/xk6-webtransport@latest
 
 ## Usage example
 
-An example of using the extension to create a bidirection stream.
+An example of using the extension to create a bidirection stream. More in [examples](examples).
 
 ```javascript
 import wt from "k6/x/webtransport";
@@ -73,11 +73,15 @@ export default function () {
 
 ## Metrics
 
-| Metric                   | Type    | Description                        |
-| ------------------------ | ------- | ---------------------------------- |
-| webtransport_read_bytes  | counter | Total bytes read                   |
-| webtransport_read_count  | counter | Total read count                   |
-| webtransport_read_size   | trend   | Trends of read size per operation  |
-| webtransport_write_bytes | counter | Total bytes written                |
-| webtransport_write_count | counter | Total write count                  |
-| webtransport_write_size  | trend   | Trends of write size per operation |
+| Metric                                | Type    | Description                        |
+| ------------------------------------- | ------- | ---------------------------------- |
+| webtransport_read_bytes               | counter | Total bytes read                   |
+| webtransport_read_count               | counter | Total read count                   |
+| webtransport_read_size                | trend   | Trends of read size per operation  |
+| webtransport_write_bytes              | counter | Total bytes written                |
+| webtransport_write_count              | counter | Total write count                  |
+| webtransport_write_size               | trend   | Trends of write size per operation |
+| webtransport_datagrams_sent_count     | counter | Number of sent datagrams           |
+| webtransport_datagrams_sent_bytes     | counter | Total bytes sent in datagrams      |
+| webtransport_datagrams_received_count | counter | Number of received datagrams       |
+| webtransport_datagrams_received_bytes | counter | Total bytes received in datagrams  |
