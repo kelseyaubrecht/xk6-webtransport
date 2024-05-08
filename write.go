@@ -32,17 +32,17 @@ func (c *Connection) logWriteMetrics(n int) {
 		Samples: []metrics.Sample{
 			{
 				Time:       now,
-				TimeSeries: metrics.TimeSeries{Metric: c.metrics.WriteCount},
+				TimeSeries: metrics.TimeSeries{Metric: c.metrics.StreamsWriteCount},
 				Value:      1,
 			},
 			{
 				Time:       now,
-				TimeSeries: metrics.TimeSeries{Metric: c.metrics.WriteBytes},
+				TimeSeries: metrics.TimeSeries{Metric: c.metrics.StreamsWriteBytes},
 				Value:      float64(n),
 			},
 			{
 				Time:       now,
-				TimeSeries: metrics.TimeSeries{Metric: c.metrics.WriteSize},
+				TimeSeries: metrics.TimeSeries{Metric: c.metrics.StreamsWriteSize},
 				Value:      float64(n),
 			},
 		},

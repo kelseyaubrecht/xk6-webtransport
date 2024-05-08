@@ -62,17 +62,17 @@ func (c *Connection) logReadMetrics(n int) {
 		Samples: []metrics.Sample{
 			{
 				Time:       now,
-				TimeSeries: metrics.TimeSeries{Metric: c.metrics.ReadCount},
+				TimeSeries: metrics.TimeSeries{Metric: c.metrics.StreamsReadCount},
 				Value:      1,
 			},
 			{
 				Time:       now,
-				TimeSeries: metrics.TimeSeries{Metric: c.metrics.ReadBytes},
+				TimeSeries: metrics.TimeSeries{Metric: c.metrics.StreamsReadBytes},
 				Value:      float64(n),
 			},
 			{
 				Time:       now,
-				TimeSeries: metrics.TimeSeries{Metric: c.metrics.ReadSize},
+				TimeSeries: metrics.TimeSeries{Metric: c.metrics.StreamsReadSize},
 				Value:      float64(n),
 			},
 		},
