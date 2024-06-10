@@ -18,7 +18,6 @@ var (
 )
 
 func (*RootModule) NewModuleInstance(vu modules.VU) modules.Instance {
-
 	metrics, err := registerMetrics(vu)
 	if err != nil {
 		log.Fatalln(vu.Runtime(), err)
