@@ -3,7 +3,6 @@ package wt
 import (
 	"io"
 	"log"
-	"strconv"
 	"time"
 
 	"go.k6.io/k6/metrics"
@@ -28,7 +27,7 @@ func (c *Connection) ReadFull(expectedReadLength int) []byte {
 	if err != nil {
 		log.Println("Read error:", err.Error())
 		if n != expectedReadLength {
-			log.Println("Read n: %q does not match the expected length of: %q\n", strconv.Itoa(n), strconv.Itoa(expectedReadLength))
+			log.Printf("Read n: %d does not match the expected length of: %d\n", n, expectedReadLength)
 		}
 	}
 
@@ -43,7 +42,7 @@ func (c *Connection) ReadAtLeast(maxReadLength int, minReadLength int) []byte {
 	if err != nil {
 		log.Println("Read error:", err.Error())
 		if n < minReadLength {
-			log.Println("Read n: %q is smaller than expected minimum: %q\n", strconv.Itoa(n), strconv.Itoa(minReadLength))
+			log.Printf("Read n: %d is smaller than expected minimum: %d\n", n, minReadLength)
 		}
 	}
 

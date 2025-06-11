@@ -32,7 +32,7 @@ func (c *Connection) CloseStreamById(id int64) {
 	if c.streams[id] != nil {
 		err := c.streams[id].Close()
 		if err != nil {
-			fmt.Printf("Encountered error closing stream id %q, %v\n", id, err)
+			fmt.Printf("Encountered error closing stream id %d, %v\n", id, err)
 			return
 		}
 		delete(c.streams, id)
