@@ -2,7 +2,6 @@ package wt
 
 import (
 	"log"
-	"strconv"
 	"time"
 
 	"go.k6.io/k6/metrics"
@@ -12,9 +11,9 @@ func (c *Connection) Write(p []byte) {
 	n, err := c.activeStream.Write(p)
 	defer c.logWriteMetrics(n)
 	if err != nil {
-		log.Println("Write error: " + err.Error())
+		log.Println("Write error:", err.Error())
 		if n != len(p) {
-			log.Println("Wrote n: " + strconv.Itoa(n) + " bytes instead of the expected: " + strconv.Itoa(len(p)))
+			log.Printf("Wrote n: %d bytes instead of the expected: %d\n", n, len(p))
 		}
 	}
 }

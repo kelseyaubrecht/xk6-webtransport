@@ -21,7 +21,7 @@ func (c *Connection) Connect(url string) {
 	var dialer webtransport.Dialer
 	_, sess, err := dialer.Dial(context.Background(), url, nil)
 	if err != nil {
-		log.Println("Error: " + err.Error())
+		log.Println("Error connecting:", err.Error())
 		return
 	}
 	c.Session = sess
@@ -35,6 +35,6 @@ func (c *Connection) Close() {
 	}
 	err := c.Session.CloseWithError(0, "")
 	if err != nil {
-		log.Println("Error: " + err.Error())
+		log.Println("Error closing session:", err.Error())
 	}
 }
