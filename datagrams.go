@@ -11,14 +11,14 @@ func (c *Connection) SendDatagram(p []byte) {
 	err := c.Session.SendDatagram(p)
 	defer c.logSendDatagramMetrics(len(p))
 	if err != nil {
-		log.Println("SendDatagram error: " + err.Error())
+		log.Println("SendDatagram error:", err.Error())
 	}
 }
 
 func (c *Connection) ReceiveDatagram() []byte {
 	p, err := c.Session.ReceiveDatagram(c.Session.Context())
 	if err != nil {
-		log.Println("ReceiveDatagram error: " + err.Error())
+		log.Println("ReceiveDatagram error:", err.Error())
 	}
 	defer c.logRecvDatagramMetrics(len(p))
 	return p

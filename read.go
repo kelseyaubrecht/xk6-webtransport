@@ -14,7 +14,7 @@ func (c *Connection) ReadAll() []byte {
 	defer c.logReadMetrics(len(rsp))
 
 	if err != nil {
-		log.Println("Read error: " + err.Error())
+		log.Println("Read error:", err.Error())
 	}
 
 	return rsp
@@ -26,9 +26,9 @@ func (c *Connection) ReadFull(expectedReadLength int) []byte {
 	defer c.logReadMetrics(n)
 
 	if err != nil {
-		log.Println("Read error: " + err.Error())
+		log.Println("Read error:", err.Error())
 		if n != expectedReadLength {
-			log.Println("Read n: " + strconv.Itoa(n) + " does not match the expected length of: " + strconv.Itoa(expectedReadLength))
+			log.Println("Read n: %q does not match the expected length of: %q\n", strconv.Itoa(n), strconv.Itoa(expectedReadLength))
 		}
 	}
 
@@ -41,9 +41,9 @@ func (c *Connection) ReadAtLeast(maxReadLength int, minReadLength int) []byte {
 	defer c.logReadMetrics(n)
 
 	if err != nil {
-		log.Println("Read error: " + err.Error())
+		log.Println("Read error:", err.Error())
 		if n < minReadLength {
-			log.Println("Read n: " + strconv.Itoa(n) + " is smaller than expected minimum: " + strconv.Itoa(minReadLength))
+			log.Println("Read n: %q is smaller than expected minimum: %q\n", strconv.Itoa(n), strconv.Itoa(minReadLength))
 		}
 	}
 
